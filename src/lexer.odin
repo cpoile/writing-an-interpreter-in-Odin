@@ -24,7 +24,7 @@ read_char :: proc(l: ^Lexer) {
 	l.readPosition += 1
 }
 
-peak_char :: proc(l: ^Lexer) -> u8 {
+peek_char :: proc(l: ^Lexer) -> u8 {
 	if l.readPosition >= len(l.input) do return 0
 	return l.input[l.readPosition]
 }
@@ -58,7 +58,33 @@ next_token :: proc(l: ^Lexer) -> Token {
 
 	switch l.ch {
 	case '=':
-		tok = Token{.ASSIGN, "="}
+		if peek_char(l) == '=' {
+			read_char(l)
+			tok.literal = "=="
+			tok.type = .EQ
+		} else {
+			tok = Token{.ASSIGN, "="}
+		}
+	case '!':
+		if peek_char(l) == '=' {
+			read_char(l)
+			tok.literal = "!="
+			tok.type = .NOT_EQ
+		} else {
+			tok = Token{.BANG, "!"}
+		}
+	case '+':
+		tok = Token{.PLUS, "+"}
+	case '-':
+		tok = Token{.MINUS, "-"}
+	case '/':
+		tok = Token{.SLASH, "/"}
+	case '*':
+		tok = Token{.ASTERISK, "*"}
+	case '<':
+		tok = Token{.LT, "<"}
+	case '>':
+		tok = Token{.GT, ">"}
 	case ';':
 		tok = Token{.SEMICOLON, ";"}
 	case '(':
@@ -67,8 +93,6 @@ next_token :: proc(l: ^Lexer) -> Token {
 		tok = Token{.RPAREN, ")"}
 	case ',':
 		tok = Token{.COMMA, ","}
-	case '+':
-		tok = Token{.PLUS, "+"}
 	case '{':
 		tok = Token{.LBRACE, "{"}
 	case '}':

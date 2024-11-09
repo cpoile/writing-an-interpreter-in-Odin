@@ -11,6 +11,14 @@ TokenType :: enum {
     // Operators
     ASSIGN,
     PLUS,
+    MINUS,
+    BANG,
+    ASTERISK,
+    SLASH,
+    LT,
+    GT,
+    EQ,
+    NOT_EQ,
 
     // Delimiters
     COMMA,
@@ -24,6 +32,11 @@ TokenType :: enum {
     // Keywords
     FUNCTION,
     LET,
+	TRUE,
+	FALSE,
+	IF,
+	ELSE,
+	RETURN,
 
     // how many types?  might not be needed in Odin
     TYPE_COUNT,
@@ -40,16 +53,16 @@ lookup_identifier :: proc(ident: string) -> TokenType {
             return .FUNCTION
         case "let":
             return .LET
-        // case "true":
-        //     return .TRUE
-        // case "false":
-        //     return .FALSE
-        // case "if":
-        //     return .IF
-        // case "else":
-        //     return .ELSE
-        // case "return":
-        //     return .RETURN
+        case "true":
+            return .TRUE
+        case "false":
+            return .FALSE
+        case "if":
+            return .IF
+        case "else":
+            return .ELSE
+        case "return":
+            return .RETURN
         case:
             return .IDENT
     }
