@@ -1,4 +1,4 @@
-package main
+package monkey
 
 Lexer :: struct {
 	input:        string,

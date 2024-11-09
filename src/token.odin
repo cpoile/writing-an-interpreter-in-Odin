@@ -1,4 +1,4 @@
-package main
+package monkey
 
 TokenType :: enum {
     ILLEGAL,
