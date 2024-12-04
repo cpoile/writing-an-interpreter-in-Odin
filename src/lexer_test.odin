@@ -112,7 +112,7 @@ if (5 < 10) {
 	defer free(l)
 
 	for tt, i in tests {
-		tok := next_token(l)
+		tok := lexer_next_token(l)
 
 		testing.expect_value(t, tok.type, tt.expected_type)
 	}

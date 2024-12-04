@@ -52,7 +52,7 @@ skip_whitespace :: proc(l: ^Lexer) {
 	}
 }
 
-next_token :: proc(l: ^Lexer) -> Token {
+lexer_next_token :: proc(l: ^Lexer) -> Token {
 	skip_whitespace(l)
 	tok: Token
 

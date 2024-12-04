@@ -14,7 +14,7 @@ start_repl :: proc(input: os.Handle, output: os.Handle) {
 
 		l := new_lexer(string(buf[:n]))
 
-		for tok := next_token(l); tok.type != .EOF; tok = next_token(l) {
+		for tok := lexer_next_token(l); tok.type != .EOF; tok = lexer_next_token(l) {
 			fmt.fprintf(output, "%v\n", tok)
 		}
 	}
