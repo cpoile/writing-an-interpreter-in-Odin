@@ -37,8 +37,8 @@ let foobar = 838383;
 
 test_let_statement :: proc(t: ^testing.T, stmt: ^Node, expected_ident: string) {
 	testing.expect_value(t, token_literal(stmt), "let")
-	testing.expect_value(t, stmt.type, NodeType.LET_STATEMENT)
-	let_stmt := cast(^LetStatement) stmt
+	let_stmt, ok := stmt.(Let_Statement)
+	testing.expect(t, ok)
 	testing.expect_value(t, let_stmt.name.value, expected_ident)
 	testing.expect_value(t, token_literal(let_stmt.name), expected_ident)
 }

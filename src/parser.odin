@@ -3,7 +3,7 @@ package monkey
 import "core:fmt"
 
 Parser :: struct {
-	l:         ^Lexer,
+	l:          ^Lexer,
 	cur_token:  Token,
 	peek_token: Token,
 }
@@ -19,7 +19,10 @@ new_parser :: proc(l: ^Lexer) -> ^Parser {
 	return p
 }
 
-next_token :: proc{parser_next_token, lexer_next_token}
+next_token :: proc {
+	parser_next_token,
+	lexer_next_token,
+}
 
 parser_next_token :: proc(p: ^Parser) {
 	p.cur_token = peek_token(p)
@@ -55,7 +58,7 @@ parse_let_statement :: proc(p: ^Parser) -> ^Node {
 
 	if !expect_peek(p, .IDENT) do return nil
 
-	stmt.name = new_identifier(p.cur_token, p.cur_token.literal)
+	(&stmt.(Let_Statement)).name = new_identifier(p.cur_token, p.cur_token.literal)
 
 	if !expect_peek(p, .ASSIGN) do return nil
 
